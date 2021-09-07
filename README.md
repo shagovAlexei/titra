@@ -1,7 +1,7 @@
 [![Docker build](https://github.com/kromitgmbh/titra/actions/workflows/push.yml/badge.svg)](https://github.com/kromitgmbh/titra/actions/workflows/push.yml) ![Docker Pulls](https://img.shields.io/docker/pulls/kromit/titra.svg) ![Latest Release](https://img.shields.io/github/v/release/kromitgmbh/titra.svg)
 
 
-# ![titra logo](public/favicons/favicon-32x32.png) titra
+# ![titra logo](public/favicons/favicon-32x32.png) titra :)
 Modern open source project time tracking for freelancers and small teams
 
 We believe in the philosophy ["Do One Thing And Do It Well."](https://en.wikipedia.org/wiki/Unix_philosophy#Do_One_Thing_and_Do_It_Well) and try to follow it in the design and implementation of titra. A great companion for titra is [Wekan](https://wekan.github.io/), where you can plan your tasks and track your time against later on.
