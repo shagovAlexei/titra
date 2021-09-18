@@ -9,6 +9,6 @@ keywords:
    - titra
    - mongodb
 
-# maintainers:
-   # - giturl: https://gitlab.com/shagov.alexei/titra
-   # - container_registry: https://gitlab.com/shagov.alexei/titra/container_registry
+maintainers:
+   - giturl: https://gitlab.com/shagov.alexei/titra
+   - container_registry: https://gitlab.com/shagov.alexei/titra/container_registry
