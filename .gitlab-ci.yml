@@ -97,15 +97,15 @@ test:
     - docker network rm $IMAGE_NET
     - docker rmi -f $CI_REGISTRY/$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME:latest
     
-# deploy:
-#   tags:
-#     - my1_shell
-#   stage: deploy
-#   script:
-#     - echo "============ Deploy project ============"
-#     - uname -a
-#     - pwd
-#     - echo "============ Finish project ============"
+deploy:
+  tags:
+    - my1_shell
+  stage: deploy
+  script:
+    - echo "============ Deploy project ============"
+    - uname -a
+    - pwd
+    - echo "============ Finish project ============"
 
 
 
