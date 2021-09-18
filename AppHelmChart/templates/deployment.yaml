@@ -1,0 +1,69 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: {{ .Values.namespace }}
+  name: {{ .Values.app.name }}-deployment
+  labels:
+    app: {{ .Values.app.labels }}
+spec:
+  selector:
+    matchLabels:
+      app: {{ .Values.app.labels }}
+  template:
+    metadata:
+      labels:
+       app: {{ .Values.app.labels }}
+    spec:
+      containers:
+      - name: {{ .Values.app.name }}
+        image: {{ .Values.containers.app_image }}
+        env:
+        - name: MONGO_URL
+          value: {{ .Values.app.deployment.mongo_url }}
+        - name: ROOT_URL
+          value: {{ .Values.app.deployment.root_url }}
+        - name: PORT
+          value: 3000
+        ports:
+          - containerPort: {{ .Values.app.containerPort }}
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  namespace: {{ .Values.namespace }}
+  name: {{ .Values.db.name }}-deployment
+  labels:
+    app: {{ .Values.db.labels }}
+spec:
+  serviceName: {{ .Values.db.service.name }}
+  podManagementPolicy: OrderedReady
+  replicas: {{ .Values.db.replicas }}
+  updateStrategy:
+    type: RollingUpdate
+  selector:
+    matchLabels:
+      app: {{ .Values.db.labels }}
+  template:
+    metadata:
+      labels:
+       app: {{ .Values.db.labels }}
+    spec:
+      containers:
+      - name: {{ .Values.db.name }}
+        image: {{ .Values.containers.db_image }}
+        ports:
+          - containerPort: {{ .Values.db.containerPort }}
+        volumeMounts:
+          # name must match the volume name below
+          - name: {{ .Values.db.ps.name }}
+            # mount path within the container
+            mountPath: {{ .Values.db.ps.mountPath }}
+  volumeClaimTemplates:
+  - metadata:
+      name: {{ .Values.db.ps.name }}
+    spec:
+      accessModes: [{{ .Values.db.ps.accessModes }}]
+      resources:
+        requests:
+          storage: {{ .Values.db.ps.storage }}

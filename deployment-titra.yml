@@ -1,0 +1,80 @@
+apiVersion : apps/v1
+kind: Deployment
+metadata:
+  name: titra-deployment
+  labels: 
+    app: main
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: main
+  template:
+    metadata:
+      labels:
+        app: main
+    spec:
+      containers:
+        - name: titra
+          image: shagovalexei/titra:latest
+          env:
+          - name: MONGO_URL
+            value: "mongodb://mongodb/titra"
+          - name: ROOT_URL
+            value: "http://titra-service"
+          - name: PORT
+            value: "3000"
+          ports:
+            - containerPort: 3000
+# ---
+# apiVersion: autoscaling/v2beta1
+# kind: HorizontalPodAutoscaler
+# metadata:
+#   name: titra-autoscaling
+# spec:
+#   scaleTargetRef:
+#     apiVersion: apps/v2beta1v1
+#     kind: Deployment
+#     name: titra-deployment-autoscaling
+#   minReplicas: 2
+#   maxReplicas: 6
+#   metrics:
+#   - type: Resource
+#     resource:
+#       name: cpu
+#       targetAverageUtilization: 70
+#   - type: Resource
+#     resource:
+#       name: memory
+#       targetAverageUtilization: 80
+---
+# apiVersion: v1
+# kind: Service
+# metadata:
+#   name: titra-service
+#   labels:
+#     app: main
+# spec:
+#   selector:
+#     app: main
+#   ports:
+#     - name      : app-listener
+#       protocol  : TCP
+#       port      : 80  # Port on Load Balancer
+#       targetPort: 3000  # Port on Pod
+#   type: LoadBalancer
+# ---
+# apiVersion: networking.k8s.io/v1beta1
+# kind: Ingress
+# metadata:
+#   name: titra-gke-ing
+#   annotations:
+#     kubernetes.io/ingress.class: gce
+# spec:
+#   rules:
+#   - http:
+#       paths:
+#       - path: /*
+#         backend:
+#           serviceName: titra-service
+#           servicePort: 80

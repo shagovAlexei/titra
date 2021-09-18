@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: mongodb
+  labels:
+    app: db
+spec:
+  selector:
+    app: db   
+  ports:
+    - name      : app-listener
+      protocol  : TCP
+      port      : 27017  # Port on Load Balancer
+      targetPort: 27017  # Port on Pod
+  # type: LoadBalancer

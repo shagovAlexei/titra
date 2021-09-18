@@ -1,0 +1,57 @@
+apiVersion : apps/v1
+# kind: Deployment
+kind: StatefulSet
+metadata:
+  name: mongo-deployment
+  labels: 
+    app: db
+spec:
+  serviceName: mongodb
+  podManagementPolicy: OrderedReady
+  replicas: 2
+  updateStrategy:
+    type: RollingUpdate
+  selector:
+    matchLabels:
+      app: db
+  template:
+    metadata:
+      labels:
+        app: db
+    spec:
+      containers:
+        - name : mongo
+          image: mongo:4.4
+          ports:
+            - containerPort: 27017
+          volumeMounts:
+            # name must match the volume name below
+            - name: mongo-persistent-storage
+              # mount path within the container
+              mountPath: /data/db
+      # volumes:
+      # - name: mongo-persistent-storage
+      #   persistentVolumeClaim:
+      #     claimName: mongo-pv-claim
+  volumeClaimTemplates:
+  - metadata:
+      name: mongo-persistent-storage
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      resources:
+        requests:
+          storage: 1Gi
+# ---
+# apiVersion: v1
+# kind: PersistentVolumeClaim
+# metadata:
+#   name: mongo-pv-claim
+#   labels:
+#     app: db
+# spec:
+#   accessModes:
+#     - ReadWriteOnce
+#   resources:
+#     requests:
+#       storage: 10Gi
+

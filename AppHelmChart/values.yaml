@@ -1,0 +1,46 @@
+namespace: my-project
+project: KroKusLab
+
+# titra default values 
+app:
+  name: titra
+  containerPort: 3000
+  labels: main
+  deployment:
+    mongo_url: mongodb://mongodb/titra
+    root_url: http://titra-service
+    port: 3000
+  service:
+    name: titra-service
+    port: 80
+    targetPort: 3000
+  hpa:
+    minReplicas: 2
+    maxReplicas: 4
+    resource:
+      cpu: 80
+  # ingress:
+    # name: ingress-resource
+
+#mongodb
+db:
+  name: mongo
+  containerPort: 27017
+  replicas: 3
+  secretname: mongo
+  labels: db
+  service:
+    name: mongodb
+    protocol: TCP
+    port: 27017
+    targetPort: 27017
+  ps:
+    name: mongo-persistent-storage
+    accessModes: ReadWriteOnce
+    mountPath: /data/db
+    storage: 1Gi
+#docker images:
+containers:
+  app_image: registry.gitlab.com/shagov.alexei/titra:latest
+  # app_image: shagovalexei/titra:latest
+  db_image: mongo:4.4
