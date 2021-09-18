@@ -3,6 +3,7 @@ variables:
   IMAGE_NAME: titra
   IMAGE_DB: mongodb
   IMAGE_NET: titra_net
+  
 
 cache:
   key: cache-for-my-task-${CI_COMMIT_REF_SLUG}
@@ -107,6 +108,7 @@ deploy:
     - echo "============ Deploy project ============"
     - uname -a
     - pwd
+    - helm upgrade --install --description $CI_PIPELINE_IID --set mongodb_root_password=$mongodb_root_password,mongodb_password=$mongodb_password,mongo_uri=$ROOT_URL titra-project AppHelmChart
     - echo "============ Finish project ============"
 
 
