@@ -22,7 +22,7 @@ before_script:
   - echo $CI_PROJECT_NAMESPACE
   - echo $CI_PROJECT_ROOT_NAMESPACE
   - echo $CI_REGISTRY_IMAGE
-  - docker network rm $IMAGE_NET
+  # - docker network rm $IMAGE_NET
 
 stages:
   - build
