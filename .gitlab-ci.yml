@@ -125,6 +125,7 @@ deploy:
     - kubectl apply -f deployment-titra.yml
     # - helm upgrade --install --description $CI_PIPELINE_IID --set namespace=$NAMESPACE_PROJECT $IMAGE_NAME $PATH_HELM
     - echo "============ Finish project ============"
+  allow_failure: true
 
 
 
