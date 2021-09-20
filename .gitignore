@@ -66,3 +66,4 @@ commands.md
 
 ssh_pubkey.env
 node_modules/
+.vscode/

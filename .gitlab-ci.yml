@@ -110,9 +110,9 @@ deploy:
     - uname -a
     - pwd
     - gcloud version
-    - helm list
     - kubectl get all 
     - kubectl get all -o wide -n titra-prod
+    - helm list
     - kubectl apply -f service-mongo.yml
     - kubectl apply -f service-titra.yml
     - kubectl apply -f deployment-mongo.yml
