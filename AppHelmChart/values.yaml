@@ -8,9 +8,9 @@ app:
   replicas: 1
   labels: main
   deployment:
-    mongo_url: mongodb://mongodb/titra
-    root_url: http://titra-service
-    port: 3000
+    mongo_url: "mongodb://mongodb/titra"
+    root_url: "http://titra-service"
+    port: "3000"
   service:
     name: titra-service
     port: 80
@@ -27,7 +27,7 @@ app:
 db:
   name: mongo
   containerPort: 27017
-  replicas: 3
+  replicas: 2
   secretname: mongo
   labels: db
   service:
