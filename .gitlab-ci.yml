@@ -6,10 +6,10 @@ variables:
   NAMESPACE_PROJECT: titra-prod
   PATH_HELM: AppHelmChart  
 
-cache:
-  key: cache-for-my-task-${CI_COMMIT_REF_SLUG}
-  paths:
-    - node_modules
+# cache:
+#   key: cache-for-my-task-${CI_COMMIT_REF_SLUG}
+#   paths:
+#     - node_modules
 
 before_script:
   - echo "============ Before_script ============"
