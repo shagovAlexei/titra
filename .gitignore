@@ -58,7 +58,6 @@ terraform.tfstate
 .terraform.tfstate.lock.info
 workspace.code-workspace
 
-vars.tf
 
 .vagrant
 
