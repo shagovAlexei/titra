@@ -2,6 +2,10 @@
 	"folders": [
 		{
 			"path": "."
+		},
+		{
+			"name": "SSH FS - azureuser",
+			"uri": "ssh://azureuser/home/gitlab-runner/builds/mHsAnaEF/0/shagov.alexei/titra-project"
 		}
 	],
 	"settings": {}
