@@ -9,6 +9,10 @@ terraform {
 }
 provider "azurerm" {
   features {}
+  subscription_id   = "058a78b8-3767-4045-9158-d2395aa1f052"
+  tenant_id         = "11476994-1438-4e88-b704-432b38979afd"
+  client_id         = "912b7dfc-6218-4c1d-bee3-a428b9e56640"
+  client_secret     =  var.client_secret
 }
 
 # Create a resource group if it doesn't exist
@@ -23,7 +27,7 @@ resource "azurerm_resource_group" "myterraformgroup" {
 
 # Create virtual network
 resource "azurerm_virtual_network" "myterraformnetwork" {
-    name                = "myVnet"
+    name                = "titra-runner"
     address_space       = ["10.0.0.0/16"]
     location            = "eastus"
     resource_group_name = azurerm_resource_group.myterraformgroup.name
@@ -131,7 +135,9 @@ resource "tls_private_key" "example_ssh" {
 output "tls_private_key" { 
     value = tls_private_key.example_ssh.private_key_pem 
     sensitive = true
+    # sensitive = false
 }
+
 
 # Create virtual machine
 resource "azurerm_linux_virtual_machine" "myterraformvm" {
@@ -153,16 +159,19 @@ resource "azurerm_linux_virtual_machine" "myterraformvm" {
         sku       = "18.04-LTS"
         version   = "latest"
     }
-
+		# user_data_file   = file("user_data.sh")
+		# user_data = file("${path.module}/user_data.sh")
+		# user_data              = file("user_data.sh")
     computer_name  = "myvm"
     admin_username = "azureuser"
     disable_password_authentication = true
 
     admin_ssh_key {
         username       = "azureuser"
-        public_key     = tls_private_key.example_ssh.public_key_openssh
+        # public_key     = tls_private_key.example_ssh.public_key_openssh
+				public_key = file("~/.ssh/id_rsa.pub")
     }
-
+  
     boot_diagnostics {
         storage_account_uri = azurerm_storage_account.mystorageaccount.primary_blob_endpoint
     }
