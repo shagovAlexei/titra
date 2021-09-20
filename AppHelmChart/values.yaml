@@ -1,10 +1,11 @@
-namespace: titra_pro
+namespace: titra-prod
 project: KroKusLab
 
 # titra default values 
 app:
   name: titra
   containerPort: 3000
+  replicas: 2
   labels: main
   deployment:
     mongo_url: mongodb://mongodb/titra
@@ -14,11 +15,11 @@ app:
     name: titra-service
     port: 80
     targetPort: 3000
-  hpa:
-    minReplicas: 2
-    maxReplicas: 4
-    resource:
-      cpu: 80
+  # hpa:
+  #   minReplicas: 2
+  #   maxReplicas: 6
+  #   resource:
+  #     cpu: 80
   # ingress:
     # name: ingress-resource
 
