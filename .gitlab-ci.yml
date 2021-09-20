@@ -113,6 +113,7 @@ deploy:
     - groups
     - gcloud version
     - kubectl version --client
+    - kubectl version -o json
     - kubectl version 
     - kubectl cluster-info
     - kubectl get nodes
