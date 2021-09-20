@@ -112,8 +112,8 @@ deploy:
     - whoami
     - groups
     - gcloud version
-    - kubectl version 
     - kubectl version --client
+    - kubectl version 
     - kubectl cluster-info
     - kubectl get nodes
     - kubectl get all 
