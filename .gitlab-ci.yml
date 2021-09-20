@@ -109,8 +109,11 @@ deploy:
     - echo "============ Deploy project ============"
     - uname -a
     - pwd
+    - whoami
+    - groups
     - gcloud version
     - kubectl version 
+    - kubectl version --client
     - kubectl cluster-info
     - kubectl get nodes
     - kubectl get all 
