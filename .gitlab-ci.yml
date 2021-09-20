@@ -109,6 +109,7 @@ deploy:
     - echo "============ Deploy project ============"
     - uname -a
     - pwd
+    - gcloud version
     - helm list
     - kubectl get all 
     - kubectl get all -o wide -n titra-prod
