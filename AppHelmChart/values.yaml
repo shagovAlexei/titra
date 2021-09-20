@@ -1,5 +1,6 @@
 namespace: titra-prod
 project: KroKusLab
+appVersion: 1.5.5
 
 # titra default values 
 app:

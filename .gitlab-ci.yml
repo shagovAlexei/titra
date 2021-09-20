@@ -137,7 +137,7 @@ deploy:
     # - kubectl apply -f service-titra.yml
     # - kubectl apply -f deployment-mongo.yml
     # - kubectl apply -f deployment-titra.yml
-    - helm upgrade --install --description $CI_PIPELINE_IID --set namespace=$NAMESPACE_PROJECT --version="1.0."$CI_PIPELINE_IID $IMAGE_NAME $PATH_HELM
+    - helm upgrade --install --description $CI_PIPELINE_IID --set namespace=$NAMESPACE_PROJECT $IMAGE_NAME $PATH_HELM
     - echo "============ Finish project ============"
   # allow_failure: true
 
