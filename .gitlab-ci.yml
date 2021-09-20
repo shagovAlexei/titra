@@ -103,7 +103,7 @@ stages:
     
 deploy:
   tags:
-    - my3_shell
+    - my1_shell
   stage: deploy
   script:
     - echo "============ Deploy project ============"
