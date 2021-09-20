@@ -5,7 +5,7 @@ project: KroKusLab
 app:
   name: titra
   containerPort: 3000
-  replicas: 2
+  replicas: 1
   labels: main
   deployment:
     mongo_url: mongodb://mongodb/titra
