@@ -109,10 +109,13 @@ deploy:
     - echo "============ Deploy project ============"
     - uname -a
     - pwd
-    - sudo kubectl apply -f service-mongo.yml
-    - sudo kubectl apply -f service-titra.yml
-    - sudo kubectl apply -f deployment-mongo.yml
-    - sudo kubectl apply -f deployment-titra.yml
+    - helm list
+    - kubectl get all 
+    - kubectl get all -o wide -n titra-prod
+    - kubectl apply -f service-mongo.yml
+    - kubectl apply -f service-titra.yml
+    - kubectl apply -f deployment-mongo.yml
+    - kubectl apply -f deployment-titra.yml
     # - helm upgrade --install --description $CI_PIPELINE_IID --set namespace=$NAMESPACE_PROJECT $IMAGE_NAME $PATH_HELM
     - echo "============ Finish project ============"
 
