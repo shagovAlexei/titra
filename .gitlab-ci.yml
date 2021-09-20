@@ -110,6 +110,7 @@ deploy:
     - uname -a
     - pwd
     - gcloud version
+    - kubectl version 
     - kubectl cluster-info
     - kubectl get nodes
     - kubectl get all 
