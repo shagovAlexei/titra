@@ -110,7 +110,7 @@ deploy:
     - uname -a
     - pwd
     # - helm upgrade --install --description $CI_PIPELINE_IID --set mongodb_root_password=$mongodb_root_password,mongodb_password=$mongodb_password,mongo_uri=$ROOT_URL titra-project AppHelmChart
-    - helm upgrade --install --description $CI_PIPELINE_IID --set mongo_uri=$ROOT_URL namespace=$NAMESPACE_PROJECT $IMAGE_NAME $PATH_HELM
+    - helm upgrade --install --description $CI_PIPELINE_IID --set mongo_uri=$ROOT_URL, namespace=$NAMESPACE_PROJECT $IMAGE_NAME $PATH_HELM
     - echo "============ Finish project ============"
 
 
