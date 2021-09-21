@@ -138,6 +138,8 @@ output "tls_private_key" {
     # sensitive = false
 }
 
+
+
 # Create virtual machine
 resource "azurerm_linux_virtual_machine" "myterraformvm" {
     name                  = "myVM"
@@ -145,7 +147,6 @@ resource "azurerm_linux_virtual_machine" "myterraformvm" {
     resource_group_name   = azurerm_resource_group.myterraformgroup.name
     network_interface_ids = [azurerm_network_interface.myterraformnic.id]
     size                  = "Standard_DS1_v2"
-
     os_disk {
         name              = "myOsDisk"
         caching           = "ReadWrite"
@@ -158,9 +159,7 @@ resource "azurerm_linux_virtual_machine" "myterraformvm" {
         sku       = "18.04-LTS"
         version   = "latest"
     }
-		# user_data_file   = file("user_data.sh")
-		# user_data = file("${path.module}/user_data.sh")
-		# user_data              = file("user_data.sh")
+
     computer_name  = "myvm"
     admin_username = "azureuser"
     disable_password_authentication = true
@@ -170,7 +169,46 @@ resource "azurerm_linux_virtual_machine" "myterraformvm" {
         # public_key     = tls_private_key.example_ssh.public_key_openssh
 				public_key = file("~/.ssh/id_rsa.pub")
     }
-  
+    
+    # connection {
+    #     host     = azurerm_public_ip.myterraformpublicip.id
+    #     # host = "${azurerm_public_ip.myterraformpublicip.fqdn}"
+    #     # host     = self.ip_address
+    #     # host     = self.public_ip
+    #     # host     = public_ip_address_id
+    #     type     = "ssh"
+    #     user = "azureuser"
+    #     private_key = "${file("~/.ssh/id_rsa")}"
+    #     timeout = "2m"
+    # }
+
+    # provisioner "file" {
+    #     source      = "user_data.sh"
+    #     destination = "user_data.sh"
+    # }  
+
+    # provisioner "remote-exec" {
+    #     inline = [
+    #     "chmod +x user_data.sh",
+    #     "user_data.sh args",
+    #     ]
+    # }
+
+#   provisioner "remote-exec" {
+#     connection {
+#     #   host        = azurerm_public_ip.myterraformpublicip.id
+#       host        = "127.0.0.1"
+#       type        = "ssh"
+#       user        = "azureuser"
+#       timeout     = "500s"
+#       private_key = "${file("~/.ssh/id_rsa")}"
+#     }
+#     inline = [
+#       "sudo apt update -y",
+#       "sudo apt-get install mc -y",
+#     ]
+#   }
+
     boot_diagnostics {
         storage_account_uri = azurerm_storage_account.mystorageaccount.primary_blob_endpoint
     }

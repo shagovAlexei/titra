@@ -1,5 +1,6 @@
 #! /bin/bash
 
+# docker
 sudo apt update -y
 
 sudo apt-get install \
@@ -18,3 +19,10 @@ echo \
 sudo apt update -y 
 
 sudo apt-get install docker-ce docker-ce-cli containerd.io -y
+
+# kube
+
+# source <(kubectl completion bash)
+# echo "source <(kubectl completion bash)" >> ~/.bashrc
+# alias kc=kubectl
+# complete -F __start_kubectl kc
