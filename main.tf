@@ -89,8 +89,10 @@ resource "azurerm_network_interface" "myterraformnic" {
     ip_configuration {
         name                          = "myNicConfiguration"
         subnet_id                     = azurerm_subnet.myterraformsubnet.id
-        private_ip_address_allocation = "Dynamic"
+        # private_ip_address_allocation = "Dynamic"
         public_ip_address_id          = azurerm_public_ip.myterraformpublicip.id
+        private_ip_address_allocation = "Static"
+        private_ip_address            = "10.0.1.5"
     }
 
     tags = {
@@ -137,9 +139,9 @@ output "tls_private_key" {
     sensitive = true
     # sensitive = false
 }
-
-
-
+# output "public_ip_address" {
+#   value = public_ip_address_id
+# }
 # Create virtual machine
 resource "azurerm_linux_virtual_machine" "myterraformvm" {
     name                  = "myVM"
@@ -167,47 +169,39 @@ resource "azurerm_linux_virtual_machine" "myterraformvm" {
     admin_ssh_key {
         username       = "azureuser"
         # public_key     = tls_private_key.example_ssh.public_key_openssh
-				public_key = file("~/.ssh/id_rsa.pub")
+		public_key = file("~/.ssh/id_rsa.pub")
     }
-    
-    # connection {
-    #     host     = azurerm_public_ip.myterraformpublicip.id
-    #     # host = "${azurerm_public_ip.myterraformpublicip.fqdn}"
-    #     # host     = self.ip_address
-    #     # host     = self.public_ip
-    #     # host     = public_ip_address_id
-    #     type     = "ssh"
-    #     user = "azureuser"
-    #     private_key = "${file("~/.ssh/id_rsa")}"
-    #     timeout = "2m"
-    # }
 
-    # provisioner "file" {
-    #     source      = "user_data.sh"
-    #     destination = "user_data.sh"
-    # }  
+    connection {
+    #   host        = azurerm_public_ip.myterraformpublicip.id
+      host        = "10.0.1.5"
+      type        = "ssh"
+      user        = "azureuser"
+      timeout     = "2m"
+      private_key = "${file("~/.ssh/id_rsa")}"
 
-    # provisioner "remote-exec" {
-    #     inline = [
-    #     "chmod +x user_data.sh",
-    #     "user_data.sh args",
-    #     ]
-    # }
+        # provisioner "remote-exec" {
+        #         inline = [
+        #         "sudo apt update -y",
+        #         "sudo apt-get install mc -y",
+        #     ]
+        # }
 
-#   provisioner "remote-exec" {
-#     connection {
-#     #   host        = azurerm_public_ip.myterraformpublicip.id
-#       host        = "127.0.0.1"
-#       type        = "ssh"
-#       user        = "azureuser"
-#       timeout     = "500s"
-#       private_key = "${file("~/.ssh/id_rsa")}"
-#     }
-#     inline = [
-#       "sudo apt update -y",
-#       "sudo apt-get install mc -y",
-#     ]
-#   }
+        provisioner "file" {
+            source      = "user_data.sh"
+            destination = "user_data.sh"
+        }  
+
+        provisioner "remote-exec" {
+            inline = [
+            "chmod +x user_data.sh",
+            "user_data.sh args",
+            ]
+        }
+      
+    }
+
+
 
     boot_diagnostics {
         storage_account_uri = azurerm_storage_account.mystorageaccount.primary_blob_endpoint
@@ -216,4 +210,7 @@ resource "azurerm_linux_virtual_machine" "myterraformvm" {
     tags = {
         environment = "Terraform Demo"
     }
+
+
+
 }
