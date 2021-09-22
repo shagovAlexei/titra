@@ -29,7 +29,7 @@ sudo usermod -aG docker gitlab-runner
 
 sudo gitlab-runner register -n \
   --url https://gitlab.com/ \
-  --registration-token bri-JvsxgsTy9UiXfTc9 \
+  --registration-token bri-JvsxgsTy9U....... \
   --executor docker \
   --description 'my1_docker' \
   --docker-image "docker" \
@@ -40,7 +40,7 @@ sudo gitlab-runner register -n \
 
 sudo gitlab-runner register -n \
   --url https://gitlab.com/ \
-  --registration-token bri-JvsxgsTy9UiXfTc9 \
+  --registration-token bri-JvsxgsTy9U........ \
   --executor shell \
   --tag-list "my1_shell" \
   --description "my1_shell" 
