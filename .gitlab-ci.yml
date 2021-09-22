@@ -28,13 +28,13 @@ before_script:
   - pwd
   - whoami
   - groups
-  - gcloud version
-  - kubectl version 
-  - kubectl cluster-info
-  - kubectl get nodes
-  - kubectl get all 
-  - kubectl get all -o wide -n titra-prod
-  - helm list
+  # - gcloud version
+  # - kubectl version 
+  # - kubectl cluster-info
+  # - kubectl get nodes
+  # - kubectl get all 
+  # - kubectl get all -o wide -n titra-prod
+  # - helm list
   # - docker network rm $IMAGE_NET
 
 stages:
