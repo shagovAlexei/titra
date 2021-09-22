@@ -16,13 +16,8 @@ app:
     name: titra-service
     port: 80
     targetPort: 3000
-  # hpa:
-  #   minReplicas: 2
-  #   maxReplicas: 6
-  #   resource:
-  #     cpu: 80
   # ingress:
-    # name: ingress-resource
+    # name: ingress
 
 #mongodb
 db:
@@ -44,5 +39,4 @@ db:
 #docker images:
 containers:
   app_image: registry.gitlab.com/shagov.alexei/titra:latest
-  # app_image: shagovalexei/titra:latest
   db_image: mongo:4.4
