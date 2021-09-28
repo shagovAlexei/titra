@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: titra-service
+  name: grafana-prometheus
   labels:
     app: main
 spec:
@@ -11,5 +11,5 @@ spec:
     - name      : app-listener
       protocol  : TCP
       port      : 80  # Port on Load Balancer
-      targetPort: 3000  # Port on Pod
+      targetPort: 80  # Port on Pod
   type: LoadBalancer
