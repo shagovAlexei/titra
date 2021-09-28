@@ -180,12 +180,12 @@ resource "azurerm_linux_virtual_machine" "myterraformvm" {
       timeout     = "2m"
       private_key = "${file("~/.ssh/id_rsa")}"
 
-        # provisioner "remote-exec" {
-        #         inline = [
-        #         "sudo apt update -y",
-        #         "sudo apt-get install mc -y",
-        #     ]
-        # }
+        provisioner "remote-exec" {
+                inline = [
+                "sudo apt update -y",
+                "sudo apt-get install mc -y",
+            ]
+        }
 
         provisioner "file" {
             source      = "user_data.sh"
